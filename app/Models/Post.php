@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Orchid\Attachment\Attachable;
+use Orchid\Filters\Filterable;
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, Filterable, Attachable;
 
     public function user() {
         return $this->belongsTo(User::class);
