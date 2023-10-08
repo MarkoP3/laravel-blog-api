@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PostCategorySeeder extends Seeder
+class BlockSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -36,6 +36,24 @@ class PostListLayout extends Table
             TD::make('created_at', __('Created'))
                 ->sort()
                 ->render(fn (Post $post) => $post->updated_at->toDateTimeString()),
+                            TD::make(__('Actions'))
+                ->align(TD::ALIGN_CENTER)
+                ->width('100px')
+                ->render(fn (Post $post) => DropDown::make()
+                    ->icon('options-vertical')
+                    ->list([
+
+                        Link::make(__('Edit'))
+                            ->route('platform.posts.edit', $post->id)
+                            ->icon('pencil'),
+
+                        Button::make(__('Delete'))
+                            ->icon('trash')
+                            ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
+                            ->method('remove', [
+                                'id' => $post->id,
+                            ]),
+                    ])),
         ];
     }
 }

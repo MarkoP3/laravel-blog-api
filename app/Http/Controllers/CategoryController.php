@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Publication;
-use App\Http\Requests\StorePublicationRequest;
-use App\Http\Requests\UpdatePublicationRequest;
+use App\Models\PostCategory;
+use App\Http\Requests\StorePostCategoryRequest;
+use App\Http\Requests\UpdatePostCategoryRequest;
 
-class PublicationController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.

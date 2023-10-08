@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use Orchid\Platform\Models\User as Authenticatable;
+use App\Models\Post;
 
 class User extends Authenticatable
 {
+    public function posts() {
+        return $this->hasMany(Post::class);
+    }
     /**
      * The attributes that are mass assignable.
      *

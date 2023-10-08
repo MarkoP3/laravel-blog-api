@@ -16,6 +16,8 @@ use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use App\Orchid\Screens\Post\PostListScreen;
+use App\Orchid\Screens\Post\PostEditScreen;
+use App\Orchid\Screens\Post\BlockListScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -82,3 +84,22 @@ Route::screen('posts', PostListScreen::class)
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.index')
         ->push(__('Posts'), route('platform.posts')));
+
+// Platform > Posts > Create
+Route::screen('posts/create', PostEditScreen::class)
+->name('platform.posts.create')
+->breadcrumbs(fn (Trail $trail) => $trail
+    ->parent('platform.posts')
+    ->push(__('Create'), route('platform.posts.create')));
+
+    Route::screen('posts/{post}/edit', PostEditScreen::class)
+    ->name('platform.posts.edit')
+    ->breadcrumbs(fn (Trail $trail, $post) => $trail
+        ->parent('platform.posts')
+        ->push($post->id, route('platform.posts.edit', $post)));
+
+        Route::screen('posts/{post}/blocks', BlockListScreen::class)
+        ->name('platform.posts.blocks')
+        ->breadcrumbs(fn (Trail $trail, $post) => $trail
+            ->parent('platform.posts.edit')
+            ->push($post->id, route('platform.posts.blocks', $post)));

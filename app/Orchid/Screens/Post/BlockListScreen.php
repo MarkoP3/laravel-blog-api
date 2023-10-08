@@ -3,24 +3,31 @@
 namespace App\Orchid\Screens\Post;
 
 use Orchid\Screen\Screen;
+use App\Models\PostBlock;
 use App\Models\Post;
-use App\Orchid\Layouts\Post\PostListLayout;
+use App\Orchid\Layouts\Post\BlockListLayout;
 use Orchid\Screen\Actions\Link;
 
-class PostListScreen extends Screen
+class BlockListScreen extends Screen
 {
+        /**
+     * @var Post
+     */
+    public $post;
+
     /**
      * Fetch data to be displayed on the screen.
      *
+     * @param Post $post
+     *
      * @return array
      */
-    public function query(): iterable
+    public function query(Post $post): iterable
     {
-        \Log::info("tu sam");
         return [
-            'posts' => Post::filters()
-                ->defaultSort('created_at', 'desc')
-                ->paginate(),
+            'blocks' => PostBlock::filters()
+            ->defaultSort('created_at', 'desc')
+            ->paginate(),
         ];
     }
 
@@ -31,7 +38,7 @@ class PostListScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'PostListScreen';
+        return 'BlockListScreen';
     }
 
     /**
@@ -41,10 +48,7 @@ class PostListScreen extends Screen
      */
     public function commandBar(): iterable
     {
-        return [
-            Link::make(__('Add'))
-                ->icon('plus')
-                ->href(route('platform.posts.create')),];
+        return [];
     }
 
     /**
@@ -55,7 +59,7 @@ class PostListScreen extends Screen
     public function layout(): iterable
     {
         return [
-            PostListLayout::class
+            BlockListLayout::class
         ];
     }
 }

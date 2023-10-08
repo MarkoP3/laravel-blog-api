@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('post_blocks', function (Blueprint $table) {
+        Schema::create('blocks', function (Blueprint $table) {
             $table->id();
+            $table->integer('post_id');
             $table->string('type');
             $table->string('value');
             $table->timestamps();
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_blocks');
+        Schema::dropIfExists('blocks');
     }
 };
