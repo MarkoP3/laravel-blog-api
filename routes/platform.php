@@ -18,6 +18,7 @@ use App\Orchid\Screens\User\UserProfileScreen;
 use App\Orchid\Screens\Post\PostListScreen;
 use App\Orchid\Screens\Post\PostEditScreen;
 use App\Orchid\Screens\Post\BlockListScreen;
+use App\Orchid\Screens\Post\BlockEditScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -92,14 +93,26 @@ Route::screen('posts/create', PostEditScreen::class)
     ->parent('platform.posts')
     ->push(__('Create'), route('platform.posts.create')));
 
+    Route::screen('posts/{post}/blocks', BlockListScreen::class)
+    ->name('platform.posts.edit.blocks')
+    ->breadcrumbs(fn (Trail $trail, $post) => $trail
+        ->parent('platform.posts.edit',$post)
+        ->push("blocks", route('platform.posts.edit.blocks', $post)));
+
+
+
+    Route::screen('posts/{post}/blocks/{block}', BlockEditScreen::class)
+        ->name('platform.posts.edit.blocks.edit')
+        ->breadcrumbs(fn (Trail $trail, $block, $post) => $trail
+            ->parent('platform.posts.edit.blocks',$post->id)
+            ->push($block->id, route('platform.posts.edit.blocks.edit', $block, $post)));
+Route::screen('posts/{post}/blocks/create', BlockEditScreen::class)
+->name('platform.posts.blocks.create')
+->breadcrumbs(fn (Trail $trail) => $trail
+    ->parent('platform.posts')
+    ->push(__('Create'), route('platform.posts.blocks.create')));
     Route::screen('posts/{post}/edit', PostEditScreen::class)
     ->name('platform.posts.edit')
     ->breadcrumbs(fn (Trail $trail, $post) => $trail
         ->parent('platform.posts')
         ->push($post->id, route('platform.posts.edit', $post)));
-
-        Route::screen('posts/{post}/blocks', BlockListScreen::class)
-        ->name('platform.posts.blocks')
-        ->breadcrumbs(fn (Trail $trail, $post) => $trail
-            ->parent('platform.posts.edit')
-            ->push($post->id, route('platform.posts.blocks', $post)));

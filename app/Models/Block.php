@@ -11,7 +11,7 @@ class Block extends Model
 {
     use HasFactory, AsSource, Filterable, Attachable;
 
-    protected $fillable = ['type'];
+    protected $fillable = ['type','post_id'];
 
     public function post() {
         return $this->belongsTo(Post::class);

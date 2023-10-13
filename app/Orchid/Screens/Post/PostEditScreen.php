@@ -71,7 +71,7 @@ class PostEditScreen extends Screen
         $post->save();
 
         Toast::info(__('Post was saved'));
-        return redirect()->route('platform.posts');
+        return redirect()->route('platform.posts.edit.blocks',$post->id);
     }
 
     /**

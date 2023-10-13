@@ -16,7 +16,6 @@ class PostListScreen extends Screen
      */
     public function query(): iterable
     {
-        \Log::info("tu sam");
         return [
             'posts' => Post::filters()
                 ->defaultSort('created_at', 'desc')
